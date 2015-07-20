@@ -1,0 +1,6 @@
+/target/
+/sql/
+.project
+.classpath
+.settings
+skyfly33.properties
