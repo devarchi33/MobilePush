@@ -28,11 +28,11 @@ public class HttpClientKakaoSendPushMessage {
 			private static URIBuilder builder = new URIBuilder();
 			private static String uuid = Config.getInstance().getProperties("uuid");
 			private static String adminKey = Config.getInstance().getProperties("adminKey");
-			private static HttpClientKakaoPushtokenRegister tokenRegister = new HttpClientKakaoPushtokenRegister();
+			private static HttpClientKakaoSearchPushToken tokenSearch = new HttpClientKakaoSearchPushToken();
 
 			@SuppressWarnings("unchecked")
 			public static void main(String[] args) {
-				tokenRegister.tokenRegister();
+				tokenSearch.searchToken();
 				
 				builder.setScheme("https");
 				builder.setHost("kapi.kakao.com");
@@ -52,18 +52,19 @@ public class HttpClientKakaoSendPushMessage {
 					JSONArray uuids = new JSONArray();
 					uuids.add(uuid);
 					KakaoMessage message = KakaoMessage.getDummyMessage();
-					String message2JSonIsNull = new GsonBuilder().serializeNulls().create().toJson(message);					
+					String messageFromJson = new GsonBuilder().serializeNulls().create().toJson(message);					
 					
 					postParameters = new ArrayList<NameValuePair>(4);
 				    postParameters.add(new BasicNameValuePair("uuids", uuids.toJSONString()));
-				    postParameters.add(new BasicNameValuePair("push_message", message2JSonIsNull));
+				    System.out.println("message : " + messageFromJson);
+				    postParameters.add(new BasicNameValuePair("push_message", messageFromJson));
 				    
 				    httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
 
 					HttpResponse response = httpClient.execute(httpPost);
 					HttpEntity entity = response.getEntity();
 
-					System.out.println("---------------------------------------- start ----------------------------------------");
+					System.out.println("---------------------------------------- push message send start ----------------------------------------");
 					// 응답 결과
 					System.out.println(response.getStatusLine());
 					if (entity != null) {
@@ -76,7 +77,7 @@ public class HttpClientKakaoSendPushMessage {
 						}
 					}
 					httpPost.abort();
-					System.out.println("---------------------------------------- end ----------------------------------------\n");
+					System.out.println("---------------------------------------- push message send end ----------------------------------------\n");
 					httpClient.getConnectionManager().shutdown();
 
 				} catch (ClientProtocolException e) {
