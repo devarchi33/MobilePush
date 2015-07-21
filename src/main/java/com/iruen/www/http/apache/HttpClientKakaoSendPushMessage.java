@@ -58,6 +58,7 @@ public class HttpClientKakaoSendPushMessage {
 					customMessageObject.put("message", "iruen dummy message!");
 					JSONObject messageObject = new JSONObject();
 					messageObject.put("custom_field", customMessageObject);
+					messageObject.put("return_url","skyfly33.dothome.co.kr/kakao/kakaologindemo.html");
 					JSONObject gcmMessage = new JSONObject();
 					gcmMessage.put("for_gcm", messageObject);
 					
