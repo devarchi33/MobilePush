@@ -23,7 +23,7 @@ public class HttpClientKakaoSearchPushToken {
 	private static String adminKey = Config.getInstance().getProperties("adminKey");
 	private static HttpClientKakaoPushtokenRegister tokenRegister = new HttpClientKakaoPushtokenRegister();
 	
-	public static void main(String[] args) {
+	public void searchToken() {
 		
 		builder.setScheme("https");
 		builder.setHost("kapi.kakao.com");
@@ -41,7 +41,7 @@ public class HttpClientKakaoSearchPushToken {
 			HttpResponse response = httpClient.execute(httpGet);
 			HttpEntity entity = response.getEntity();
 			
-			System.out.println("---------------------------------------- start ----------------------------------------");
+			System.out.println("---------------------------------------- token search start ----------------------------------------");
 			System.out.println(response.getStatusLine());
 			if (entity != null) {
 				System.out.println("Response content length: " + entity.getContentLength());
@@ -54,7 +54,7 @@ public class HttpClientKakaoSearchPushToken {
 
 			}
 			httpGet.abort();
-			System.out.println("---------------------------------------- end ----------------------------------------\n");
+			System.out.println("---------------------------------------- token search end ----------------------------------------\n");
 		} catch (URISyntaxException e) {
 			// TODO: handle exception
 		}catch (ClientProtocolException e) {
