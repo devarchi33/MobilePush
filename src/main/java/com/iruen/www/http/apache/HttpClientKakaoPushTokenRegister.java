@@ -21,7 +21,7 @@ public class HttpClientKakaoPushTokenRegister {
 	
 	// HttpClient »ý¼º
 		private static HttpClient httpClient = HttpClientBuilder.create().build();
-		private static String adminKey = "KakaoAK " + Config.getInstance().getProperties("adminKey");
+		private static String adminKey = Config.getInstance().getProperties("adminKey");
 		private static String uuid = Config.getInstance().getProperties("uuid");
 		private static String device_id = Config.getInstance().getProperties("device_id");
 		private static String push_type = Config.getInstance().getProperties("push_type");
