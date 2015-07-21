@@ -17,9 +17,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.iruen.www.helper.Config;
 
-public class HttpClientKakaoPushTokenRegister {
+public class HttpClientKakaoPushtokenRegister {
 	
-	// HttpClient »ý¼º
+	// HttpClient 생성
 		private static HttpClient httpClient = HttpClientBuilder.create().build();
 		private static String adminKey = Config.getInstance().getProperties("adminKey");
 		private static String uuid = Config.getInstance().getProperties("uuid");
@@ -29,7 +29,7 @@ public class HttpClientKakaoPushTokenRegister {
 
 		public void tokenRegister() {
 			try {
-				// HttpGet»ý¼º
+				// HttpGet생성
 				HttpPost httpPost = new HttpPost("https://kapi.kakao.com/v1/push/register");
 
 				System.out.println("executing request : " + httpPost.getURI());
@@ -51,8 +51,8 @@ public class HttpClientKakaoPushTokenRegister {
 				HttpResponse response = httpClient.execute(httpPost);
 				HttpEntity entity = response.getEntity();
 
-				System.out.println("---------------------------------------- start ----------------------------------------");
-				// ÀÀ´ä °á°ú
+				System.out.println("---------------------------------------- token register start ----------------------------------------");
+				// 응답 결과
 				System.out.println(response.getStatusLine());
 				if (entity != null) {
 					System.out.println("Response content length: " + entity.getContentLength());
@@ -63,8 +63,9 @@ public class HttpClientKakaoPushTokenRegister {
 						System.out.println(line);
 					}
 				}
+				
 				httpPost.abort();
-				System.out.println("---------------------------------------- end ----------------------------------------");
+				System.out.println("---------------------------------------- token register end ----------------------------------------\n");
 				httpClient.getConnectionManager().shutdown();
 
 			} catch (ClientProtocolException e) {
