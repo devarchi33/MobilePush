@@ -21,7 +21,7 @@ public class HttpClientKakaoSearchPushToken {
 	private static URIBuilder builder= new URIBuilder();
 	private static String uuid = Config.getInstance().getProperties("uuid");
 	private static String adminKey = Config.getInstance().getProperties("adminKey");
-	private static HttpClientKakaoPushtokenRegister tokenRegister = new HttpClientKakaoPushtokenRegister();
+	private static HttpClientKakaoPushTokenRegister tokenRegister = new HttpClientKakaoPushTokenRegister();
 	
 	public void searchToken() {
 		

@@ -17,7 +17,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.iruen.www.helper.Config;
 
-public class HttpClientKakaoPushtokenRegister {
+public class HttpClientKakaoPushTokenRegister {
 	
 	// HttpClient 생성
 		private static HttpClient httpClient = HttpClientBuilder.create().build();
