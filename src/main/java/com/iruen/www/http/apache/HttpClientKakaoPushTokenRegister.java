@@ -17,9 +17,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.iruen.www.helper.Config;
 
-public class HttpClientKakaoPushtokenRegister {
+public class HttpClientKakaoPushTokenRegister {
 	
-	// HttpClient »ý¼º
+	// HttpClient Â»Ã½Â¼Âº
 		private static HttpClient httpClient = HttpClientBuilder.create().build();
 		private static String adminKey = "KakaoAK " + Config.getInstance().getProperties("adminKey");
 		private static String uuid = Config.getInstance().getProperties("uuid");
@@ -27,9 +27,9 @@ public class HttpClientKakaoPushtokenRegister {
 		private static String push_type = Config.getInstance().getProperties("push_type");
 		private static String push_token = Config.getInstance().getProperties("push_token");
 
-		public static void main(String[] args) {
+		public void tokenRegister() {
 			try {
-				// HttpGet»ý¼º
+				// HttpGetÂ»Ã½Â¼Âº
 				HttpPost httpPost = new HttpPost("https://kapi.kakao.com/v1/push/register");
 
 				System.out.println("executing request : " + httpPost.getURI());
@@ -52,7 +52,7 @@ public class HttpClientKakaoPushtokenRegister {
 				HttpEntity entity = response.getEntity();
 
 				System.out.println("---------------------------------------- start ----------------------------------------");
-				// ÀÀ´ä °á°ú
+				// Ã€Ã€Â´Ã¤ Â°Ã¡Â°Ãº
 				System.out.println(response.getStatusLine());
 				if (entity != null) {
 					System.out.println("Response content length: " + entity.getContentLength());
