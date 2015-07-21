@@ -27,7 +27,7 @@ public class HttpClientKakaoSendPushMessage {
 			private static HttpClient httpClient = HttpClientBuilder.create().build();
 			private static URIBuilder builder = new URIBuilder();
 			private static String uuid = Config.getInstance().getProperties("uuid");
-			private static String adminKey = "KakaoAK " + Config.getInstance().getProperties("adminKey");
+			private static String adminKey = Config.getInstance().getProperties("adminKey");
 			private static HttpClientKakaoPushtokenRegister tokenRegister = new HttpClientKakaoPushtokenRegister();
 
 			@SuppressWarnings("unchecked")
