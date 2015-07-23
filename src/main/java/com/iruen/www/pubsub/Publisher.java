@@ -27,7 +27,7 @@ public class Publisher {
                 String line = reader.readLine();
 
                 if (!"quit".equals(line)) {
-                    publisherJedis.publish(channel, line);
+                   // publisherJedis.publish(channel, line);
                 } else {
                     break;
                 }

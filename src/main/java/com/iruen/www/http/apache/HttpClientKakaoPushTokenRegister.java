@@ -20,7 +20,6 @@ import com.iruen.www.helper.Config;
 public class HttpClientKakaoPushTokenRegister {
 	
 	// HttpClient 생성
-		private static HttpClient httpClient = HttpClientBuilder.create().build();
 		private static String adminKey = Config.getInstance().getProperties("adminKey");
 		private static String uuid = Config.getInstance().getProperties("uuid");
 		private static String device_id = Config.getInstance().getProperties("device_id");
@@ -28,6 +27,7 @@ public class HttpClientKakaoPushTokenRegister {
 		private static String push_token = Config.getInstance().getProperties("push_token");
 
 		public void tokenRegister() {
+			HttpClient httpClient = HttpClientBuilder.create().build();
 			try {
 				// HttpGet생성
 				HttpPost httpPost = new HttpPost("https://kapi.kakao.com/v1/push/register");
@@ -66,7 +66,6 @@ public class HttpClientKakaoPushTokenRegister {
 				
 				httpPost.abort();
 				System.out.println("---------------------------------------- token register end ----------------------------------------\n");
-				httpClient.getConnectionManager().shutdown();
 
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();

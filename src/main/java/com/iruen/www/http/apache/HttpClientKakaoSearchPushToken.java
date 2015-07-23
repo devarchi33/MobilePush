@@ -17,13 +17,13 @@ import com.iruen.www.helper.Config;
 
 public class HttpClientKakaoSearchPushToken {
 
-	private static HttpClient httpClient = HttpClientBuilder.create().build();
+	private static HttpClientKakaoPushTokenRegister tokenRegister = new HttpClientKakaoPushTokenRegister();
 	private static URIBuilder builder= new URIBuilder();
 	private static String uuid = Config.getInstance().getProperties("uuid");
 	private static String adminKey = Config.getInstance().getProperties("adminKey");
-	private static HttpClientKakaoPushTokenRegister tokenRegister = new HttpClientKakaoPushTokenRegister();
 	
 	public void searchToken() {
+		HttpClient httpClient = HttpClientBuilder.create().build();
 		
 		builder.setScheme("https");
 		builder.setHost("kapi.kakao.com");
@@ -61,6 +61,8 @@ public class HttpClientKakaoSearchPushToken {
 			// TODO: handle exception
 		}catch (IOException e) {
 			// TODO: handle exception
+		}finally {
+			httpClient.getConnectionManager().shutdown();
 		}
 	}
 }

@@ -1,13 +1,18 @@
 package com.iruen.www.pubsub;
 
+import com.iruen.www.http.apache.HttpClientKakaoSendPushMessage;
+
 import redis.clients.jedis.JedisPubSub;
 
 public class Subscriber extends JedisPubSub {
+	
+	private static HttpClientKakaoSendPushMessage sendMessage  = new HttpClientKakaoSendPushMessage();
 
 	@Override
 	public void onMessage(String channel, String message) {
 		System.out.println("Message received. Channel: " + channel + ", Msg: "
 				+ message);
+		sendMessage.sendMessage(message);
 	}
 
 	@Override

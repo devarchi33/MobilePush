@@ -26,14 +26,14 @@ import com.iruen.www.kakao.domain.KakaoMessage;
 
 public class HttpClientKakaoSendPushMessage {
 	// HttpClient 생성
-			private static HttpClient httpClient = HttpClientBuilder.create().build();
 			private static URIBuilder builder = new URIBuilder();
 			private static String uuid = Config.getInstance().getProperties("uuid");
 			private static String adminKey = Config.getInstance().getProperties("adminKey");
 			private static HttpClientKakaoSearchPushToken tokenSearch = new HttpClientKakaoSearchPushToken();
 
 			@SuppressWarnings("unchecked")
-			public static void main(String[] args) {
+			public void sendMessage(String message) {
+				HttpClient httpClient = HttpClientBuilder.create().build();
 				tokenSearch.searchToken();
 				
 				builder.setScheme("https");
@@ -55,7 +55,8 @@ public class HttpClientKakaoSendPushMessage {
 					uuids.add(uuid);
 //					KakaoMessage message = KakaoMessage.getDummyMessage();
 					JSONObject customMessageObject = new JSONObject();
-					customMessageObject.put("message", "iruen dummy message!");
+//					customMessageObject.put("message", "iruen dummy message!");
+					customMessageObject.put("message",message);
 					JSONObject messageObject = new JSONObject();
 					messageObject.put("custom_field", customMessageObject);
 					JSONObject gcmMessage = new JSONObject();
@@ -86,7 +87,6 @@ public class HttpClientKakaoSendPushMessage {
 					}
 					httpPost.abort();
 					System.out.println("---------------------------------------- push message send end ----------------------------------------\n");
-					httpClient.getConnectionManager().shutdown();
 
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
