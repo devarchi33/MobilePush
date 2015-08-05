@@ -19,6 +19,7 @@ public class KakaoSearchPushToken {
     private String uuid = Config.getInstance().getProperties("uuid");
 
     public boolean searchPushToken() {
+        printTitle("searchPushToken");
 
         try {
             URI uri = UriComponentsBuilder.newInstance()
@@ -38,6 +39,7 @@ public class KakaoSearchPushToken {
 
             ResponseEntity<String> pushTokenResponse = restTemplate.exchange(
                     uri, HttpMethod.GET, requestEntity, String.class);
+            System.out.println(pushTokenResponse);
 
             return true;
         } catch (RestClientException e) {
@@ -46,4 +48,8 @@ public class KakaoSearchPushToken {
         }
     }
 
+    private static void printTitle(String title) {
+        System.out.println("\n\n");
+        System.out.println("[" + title + "]");
+    }
 }
