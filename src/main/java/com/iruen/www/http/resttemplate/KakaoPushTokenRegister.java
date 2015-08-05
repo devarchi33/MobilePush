@@ -21,16 +21,6 @@ public class KakaoPushTokenRegister {
     private String push_type = Config.getInstance().getProperties("push_type");
     private String push_token = Config.getInstance().getProperties("push_token");
 
-    public static void main(String[] args) {
-        KakaoPushTokenRegister kr = new KakaoPushTokenRegister();
-        boolean check = kr.tokenRegister();
-
-        if (check)
-            System.out.println("Register Success");
-        else
-            System.out.println("Register Fail");
-    }
-
     public boolean tokenRegister() {
         printTitle("Token Register");
         String uri = "https://kapi.kakao.com/v1/push/register";
