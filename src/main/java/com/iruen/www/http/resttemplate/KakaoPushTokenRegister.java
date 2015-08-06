@@ -20,10 +20,10 @@ public class KakaoPushTokenRegister {
     private String device_id = Config.getInstance().getProperties("device_id");
     private String push_type = Config.getInstance().getProperties("push_type");
     private String push_token = Config.getInstance().getProperties("push_token");
+    private static final String URI = "https://kapi.kakao.com/v1/push/register";
 
     public boolean tokenRegister() {
         printTitle("Token Register");
-        String uri = "https://kapi.kakao.com/v1/push/register";
 
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -38,7 +38,8 @@ public class KakaoPushTokenRegister {
 
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(paramMap, headers);
 
-            ResponseEntity<String> registerResponse = restTemplate.exchange(uri, HttpMethod.POST, requestEntity, String.class);
+            ResponseEntity<String> registerResponse = restTemplate.exchange(URI, HttpMethod.POST, requestEntity, String.class);
+            System.out.println(registerResponse);
 
             return true;
         } catch (RestClientException e) {
