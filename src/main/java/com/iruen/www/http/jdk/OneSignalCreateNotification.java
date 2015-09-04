@@ -1,5 +1,7 @@
 package com.iruen.www.http.jdk;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iruen.www.domain.Message;
 import com.iruen.www.helper.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,21 +19,25 @@ public class OneSignalCreateNotification {
 
     Logger logger = LoggerFactory.getLogger(OneSignalCreateNotification.class);
 
+    ObjectMapper mapper = new ObjectMapper();
 
     private String one_signal_app_id = Config.getInstance().getProperties("one_signal_app_id");
     private final String URI = "https://onesignal.com/api/v1/notifications";
 
-    public void createnotificationByJDK(String message) {
-        String contents = "{ " +
-                "\"app_id\"            : \"" + one_signal_app_id + "\", " +
-                "\"contents\"            : {\"en\" : \"" + message + "\"}, " +
-                "\"included_segments\" : [ \"Test\" ] " +
-                "}";
-
-        String method = "POST";
-        String contentType = "application/json";
-
+    public void createnotificationByJDK(String rawMessage) {
         try {
+            Message message = mapper.readValue(rawMessage, Message.class);
+            String sendMessage = message.getIp() + ": " + "something wrong with " + message.getMessage();
+
+            String contents = "{ " +
+                    "\"app_id\"            : \"" + one_signal_app_id + "\", " +
+                    "\"contents\"            : {\"en\" : \"" + sendMessage + "\"}, " +
+                    "\"included_segments\" : [ \"Test\" ] " +
+                    "}";
+
+            String method = "POST";
+            String contentType = "application/json";
+
             URL u = new URL(URI);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
             conn.setRequestMethod(method);
@@ -50,7 +56,7 @@ public class OneSignalCreateNotification {
             wr.flush();
             wr.close();
 
-
+            logger.info(conn.toString());
             InputStream is = conn.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
