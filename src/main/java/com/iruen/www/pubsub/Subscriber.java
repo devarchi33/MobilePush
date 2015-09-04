@@ -3,16 +3,20 @@ package com.iruen.www.pubsub;
 import com.iruen.www.http.apache.HttpClientKakaoSendPushMessage;
 
 import com.iruen.www.http.jdk.OneSignalCreateNotification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPubSub;
 
 public class Subscriber extends JedisPubSub {
+
+    Logger logger = LoggerFactory.getLogger(Subscriber.class);
 
     //	private static HttpClientKakaoSendPushMessage sendMessage  = new HttpClientKakaoSendPushMessage();
     private static OneSignalCreateNotification oneSignalCreateNotification = new OneSignalCreateNotification();
 
     @Override
     public void onMessage(String channel, String message) {
-        System.out.println("Message received. Channel: " + channel + ", Msg: "
+        logger.info("Message received. Channel: " + channel + ", Msg: "
                 + message);
 //		sendMessage.sendMessage(message);
         oneSignalCreateNotification.createnotificationByJDK(message);
