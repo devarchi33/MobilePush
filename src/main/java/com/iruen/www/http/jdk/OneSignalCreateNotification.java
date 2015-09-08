@@ -32,7 +32,8 @@ public class OneSignalCreateNotification {
             String contents = "{ " +
                     "\"app_id\"            : \"" + one_signal_app_id + "\", " +
                     "\"contents\"            : {\"en\" : \"" + sendMessage + "\"}, " +
-                    "\"included_segments\" : [ \"Test\" ] " +
+//                    "\"included_segments\" : [ \"Test\" ] " +
+                    "\"include_player_ids\" : [ \"5b1a39e4-5503-11e5-bdee-67e2d97b8c56\" ] " +
                     "}";
 
             String method = "POST";
